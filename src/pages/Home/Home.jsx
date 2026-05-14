@@ -6,6 +6,7 @@ import Grid from './Grid'
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import Navbar from '../../components/common/Navbar';
+import ThemeContext from '../../components/context/ThemeContext';
 export default function Home(){
 const images = [
   "https://picsum.photos/id/1018/1000/100",
@@ -34,10 +35,13 @@ const images = [
     setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
   };
 
+  const {theme}=React.useContext(ThemeContext);
+
     return(
         <>
         <Header/>
         <Navbar/>
+        <div className={theme}>
         <div className="wrapper">
             <div className="slideshow">
       <button className="left" onClick={prevSlide}>❮</button>
@@ -55,6 +59,7 @@ const images = [
   </div>
 </div>
 <Grid/>
+        </div>
         </div>
         <Footer/>
         </>

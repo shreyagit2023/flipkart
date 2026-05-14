@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";  // Importing the separate CSS file
+import ThemeBtn from "./ThemeBtn";
 
 export default function Header() {
   return (
@@ -42,6 +43,7 @@ export default function Header() {
       <div className="become-seller">
         Become a Seller
       </div>
+      <ThemeBtn/>
     </header>
   );
 }

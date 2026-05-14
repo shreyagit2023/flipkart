@@ -19,13 +19,15 @@ import Profile from "./pages/Profile/Profile";
 import Search from "./pages/Search/SearchResults";
 import WishList from "./pages/Wishlist/Wishlist";
 import Navbar from "./components/common/Navbar";
-
+import ThemeProvider from "./components/context/ThemeProvider"
+import UserProvider from "./context/UserProvider";
 
 function App() {
   return (
-    <>
+    <UserProvider>
+      <ThemeProvider>
+        <main style={{ minHeight: '70vh' }}>
 
-      <main style={{ minHeight: '70vh' }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetail />} />
@@ -43,7 +45,8 @@ function App() {
         </Routes>
       </main>
 
-    </>
+    </ThemeProvider>
+    </UserProvider>
   );
 }
 

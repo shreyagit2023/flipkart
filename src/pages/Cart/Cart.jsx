@@ -7,14 +7,15 @@ import {Link} from "react-router-dom";
 export default function Cart() {
   const [cart, setCart] = useState([]);
 
+
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
   }, []);
 
-  const increaseQty = (id) => {
+  const increaseQty = (_id) => {
     const updatedCart = cart.map((item) =>
-      item.id === id
+      item._id === _id
         ? { ...item, quantity: item.quantity + 1 }
         : item
     );
@@ -22,10 +23,10 @@ export default function Cart() {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  const decreaseQty = (id) => {
+  const decreaseQty = (_id) => {
     const updatedCart = cart
       .map((item) =>
-        item.id === id
+        item._id === _id
           ? { ...item, quantity: item.quantity - 1 }
           : item
       )
@@ -43,7 +44,12 @@ export default function Cart() {
   console.log("TOTAL PRICE:", totalPrice);
 
   if (cart.length === 0) {
-    return <h2 style={{ padding: "40px" }}>Your cart is empty</h2>;
+    return(
+    <>
+    <Header/>
+    <Navbar/>
+    <h2 style={{ padding: "40px" }}>Your cart is empty</h2>;
+    </>);
   }
 
   return (
@@ -53,17 +59,17 @@ export default function Cart() {
     <div className="cart-page">
       <div className="cart-items">
         {cart.map((item) => (
-          <div className="cart-item" key={item.id}>
-           <Link to={`/product/${item.id}`}><img src={item.image}  alt={item.title} /></Link>;
+          <div className="cart-item" key={item._id}>
+           <Link to={`/product/${item._id}`}><img src={item.image}  alt={item.title} /></Link>
 
             <div className="cart-info">
               <h3>{item.title}</h3>
               <p>₹{item.price}</p>
 
               <div className="qty">
-                <button onClick={() => decreaseQty(item.id)}>-</button>
+                <button onClick={() => decreaseQty(item._id)}>-</button>
                 <span>{item.quantity}</span>
-                <button onClick={() => increaseQty(item.id)}>+</button>
+                <button onClick={() => increaseQty(item._id)}>+</button>
               </div>
             </div>
           </div>
